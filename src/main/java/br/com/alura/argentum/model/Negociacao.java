@@ -28,4 +28,8 @@ public final class Negociacao implements Serializable {
 	public LocalDateTime getData() {
 		return data;
 	}
+	
+	public double getVolume() {
+		return this.preco * this.quantidade;
+	}
 }

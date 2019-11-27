@@ -54,4 +54,14 @@ public final class Candlestick implements Serializable {
 	public boolean isBaixa() {
 		return this.fechamento < this.abertura;
 	}
+
+	@Override
+	public String toString() {
+		return  "abertura: " + abertura 
+					+ "\nfechamento: " + fechamento 
+					+ "\nmaximo: " + maximo 
+					+ "\nminimo:"	+ minimo 
+					+ "\nvolume: " + volume 
+					+ "\ndata: " + data;
+	}
 }
