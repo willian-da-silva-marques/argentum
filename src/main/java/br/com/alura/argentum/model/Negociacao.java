@@ -1,7 +1,9 @@
 package br.com.alura.argentum.model;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public final class Negociacao implements Serializable {
 
@@ -78,4 +80,23 @@ public final class Negociacao implements Serializable {
 			return false;
 		return true;
 	}
+
+	public boolean isMesmoDia(LocalDateTime data) {
+		return this.data.getDayOfMonth() == data.getDayOfMonth() 
+		&& this.data.getMonth() == data.getMonth()
+		&& this.data.getYear() == data.getYear();
+	}
+
+	@Override
+	public String toString() {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
+		return "{ \n"
+					+ "\tpreco: " + numberFormat.format(preco) 
+					+ "\n\tquantidade: " + quantidade 
+					+ "\n\tdata: " + dateTimeFormatter.format(data) 
+		  + " \n},";
+	}
+	
+	
 }
