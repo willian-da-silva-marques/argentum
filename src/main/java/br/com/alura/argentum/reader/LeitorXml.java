@@ -1,6 +1,7 @@
 package br.com.alura.argentum.reader;
 
-import java.time.LocalDateTime;
+import java.io.InputStream;
+import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -8,18 +9,13 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import br.com.alura.argentum.converters.LocalDateTimeConverter;
 import br.com.alura.argentum.model.Negociacao;
 
+@SuppressWarnings("unchecked")
 public class LeitorXml {
 
-	public static void main(String[] args) {
-		
-		Negociacao negociacao = new Negociacao(10.0, 2, LocalDateTime.now());
-		
+	public List<Negociacao> carregarNegociacoes(InputStream inputStream) {
 		XStream xStream = new XStream(new DomDriver());
-		
+		xStream.alias("negociacao", Negociacao.class);
 		xStream.registerLocalConverter(Negociacao.class, "data", new LocalDateTimeConverter());
-		
-		String xml = xStream.toXML(negociacao);
-		
-		System.out.println(xml);
+		return (List<Negociacao>) xStream.fromXML(inputStream);
 	}
 }
